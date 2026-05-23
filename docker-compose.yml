@@ -10,17 +10,13 @@ services:
     restart: always
 
   frontend:
-    image: node:18
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
+    build:
+      context: ./frontend
     ports:
       - "3001:3000"
     environment:
       - HOST=0.0.0.0
       - CHOKIDAR_USEPOLLING=true
-    command: sh -c "npm install && npm start"
-    stdin_open: true
-    tty: true
+    restart: always
     depends_on:
       - backend
