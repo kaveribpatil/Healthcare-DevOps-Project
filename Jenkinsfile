@@ -18,8 +18,10 @@ pipeline {
         stage('Stop Old Containers') {
             steps {
                 sh '''
-                cd $WORKSPACE
-                docker compose down || true
+                docker compose down --remove-orphans || true
+
+                docker rm -f backend || true
+                docker rm -f frontend || true
                 '''
             }
         }
