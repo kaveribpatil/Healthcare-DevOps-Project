@@ -1,0 +1,25 @@
+services:
+
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://Kaveri:Test123@cluster0.tn1bink.mongodb.net/healthcare?retryWrites=true&w=majority
+    restart: always
+
+  frontend:
+    image: node:18
+    container_name: frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "3001:3000"
+    command: sh -c "npm install && npm start"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
