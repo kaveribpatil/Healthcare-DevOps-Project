@@ -1,12 +1,15 @@
+version: "3.8"
+
 services:
 
   backend:
-    build: .
+    build:
+      context: ./backend
     container_name: backend
     ports:
       - "5000:5000"
     environment:
-      - MONGO_URI=mongodb+srv://Kaveri:Test123@cluster0.tn1bink.mongodb.net/healthcare?retryWrites=true&w=majority
+      - MONGO_CONN_STR=mongodb+srv://Kaveri:Test123@cluster0.tn1bink.mongodb.net/healthcare?retryWrites=true&w=majority
     restart: always
 
   frontend:
@@ -15,7 +18,7 @@ services:
     working_dir: /app
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - node_modules:/app/node_modules
     ports:
       - "3001:3000"
     command: sh -c "npm install && npm start"
@@ -23,3 +26,6 @@ services:
     tty: true
     depends_on:
       - backend
+
+volumes:
+  node_modules:

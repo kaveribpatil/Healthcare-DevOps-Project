@@ -2,15 +2,37 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+
+        stage('Debug Workspace') {
             steps {
-                bat 'docker build -t healthcare-app .'
+                sh '''
+                pwd
+                ls -la
+                '''
             }
         }
 
-        stage('Run') {
+        stage('Stop Old Containers') {
             steps {
-                bat 'docker run -d -p 5000:5000 healthcare-app'
+                sh '''
+                cd $WORKSPACE
+                docker compose down || true
+                '''
+            }
+        }
+
+        stage('Build & Run') {
+            steps {
+                sh '''
+                cd $WORKSPACE
+                docker compose up --build -d
+                '''
+            }
+        }
+
+        stage('Check Running Containers') {
+            steps {
+                sh 'docker ps'
             }
         }
     }
