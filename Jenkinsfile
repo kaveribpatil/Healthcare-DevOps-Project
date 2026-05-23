@@ -6,7 +6,10 @@ pipeline {
         stage('Debug Workspace') {
             steps {
                 sh '''
+                echo "Current Directory:"
                 pwd
+
+                echo "Workspace Files:"
                 ls -la
                 '''
             }
@@ -32,7 +35,9 @@ pipeline {
 
         stage('Check Running Containers') {
             steps {
-                sh 'docker ps'
+                sh '''
+                docker ps
+                '''
             }
         }
     }
