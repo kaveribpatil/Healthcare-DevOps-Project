@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  background: #0f172a;
+}
+
+/* Animated Background */
+.container,
+.dashboard-container {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    -45deg,
+    #0f172a,
+    #1e3a8a,
+    #0ea5e9,
+    #06b6d4
+  );
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  padding: 30px;
+}
+
+/* Gradient Animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating Circles */
+.container::before,
+.container::after,
+.dashboard-container::before,
+.dashboard-container::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  animation: float 8s infinite ease-in-out;
+}
+
+.container::before,
+.dashboard-container::before {
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  left: -100px;
+}
+
+.container::after,
+.dashboard-container::after {
+  width: 250px;
+  height: 250px;
+  bottom: -80px;
+  right: -80px;
+  animation-delay: 3s;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-40px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 42px;
+  color: white;
+  margin-bottom: 40px;
+  text-shadow: 0 0 15px cyan;
+}
+
+/* Glassmorphism Form */
+.form-box {
+  width: 380px;
+  margin: auto;
+  padding: 35px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 1s ease;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Heading */
+.form-box h1 {
+  color: white;
+  margin-bottom: 25px;
+  text-shadow: 0 0 10px cyan;
+}
+
+/* Inputs */
+.form-box input {
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  font-size: 15px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+/* Placeholder */
+.form-box input::placeholder {
+  color: #e2e8f0;
+}
+
+/* Button */
+.form-box button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: cyan;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.4s;
+  font-weight: bold;
+}
+
+/* Hover Button */
+.form-box button:hover {
+  transform: scale(1.05);
+  background: white;
+  box-shadow: 0 0 20px cyan;
+}
+
+/* Links */
+.form-box a {
+  color: yellow;
+  text-decoration: none;
+}
+
+/* Card Container */
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+/* Patient Cards */
+.patient-card {
+  width: 280px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  color: white;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transition: 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Neon Glow Border */
+.patient-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    cyan,
+    blue,
+    purple,
+    cyan
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Card Hover */
+.patient-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px cyan;
+}
+
+/* Card Heading */
+.patient-card h2 {
+  color: cyan;
+  margin-bottom: 15px;
+}
+
+/* Card Text */
+.patient-card p {
+  margin: 10px 0;
+  font-size: 17px;
+}
