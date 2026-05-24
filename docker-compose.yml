@@ -1,23 +1,31 @@
 services:
 
   backend:
+
     build:
       context: ./backend
+
     ports:
-      - "5000:5000"
+      - "5003:5002"
+
     environment:
-      - MONGO_CONN_STR=mongodb+srv://Kaveri:Test123@cluster0.tn1bink.mongodb.net/healthcare?retryWrites=true&w=majority
+      - PORT=5002
+
     restart: always
 
   frontend:
+
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+
     ports:
       - "3001:3000"
+
     environment:
       - HOST=0.0.0.0
       - CHOKIDAR_USEPOLLING=true
+
     restart: always
+
     depends_on:
       - backend
